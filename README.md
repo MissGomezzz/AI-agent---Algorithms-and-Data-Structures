@@ -20,24 +20,24 @@ o	Output: Python code that solves it + Time Complexity explanation.
 
 We decided to create a complete professional prompt to ChatGPT, since its the best AI in terms of reasoning. This prompt complies with the instructions and conditions given and chooses the best method from a given list in the prompt. 
 
-## Prompt:
+## Prompt
 
 bla bla 
 
-# Exercises: 
-Although the instrructions asks us for an AI agent that is capable of solving from 5 to 10 problems from the same family topic, we will show 3 of them - where all of them are new to the AI agent. 
+# Exercises
+Although the instrructions asks us for an AI agent that is capable of solving from 5 to 10 problems from the same family topic, we will show 3 of them - where all of them are new to the AI agent. However, if you want to check for more problems related to algorithms and data structures, the prompt for the AI agent should work fine :)
 
-## Exercise 1:
+## Exercise 1
 Problem: 
 Topic: 
 Solving method the AI should choose: 
 
-## Exercise 2:
+## Exercise 2
 Problem:
 Topic:
 Solving method the AI should choose: 
 
-## Exercise 3:
+## Exercise 3
 Problem: 
 Topic:
 Solving method the AI should choose: 
