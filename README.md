@@ -6,11 +6,17 @@ In order to understand how an AI agent works and how to buid using prompts, we c
 ## Intructions 
 
 •	Task: Build an AI Agent (or a sophisticated prompt engineering loop) that can solve 5-10 algorithmic problems of a specific type (e.g., "Dynamic Programming problems from Cormen" or "Codeforces Graph problems").
+
 •	Workflow:
+
 o	Input: The text of the problem.
+
 o	Process: The Agent breaks down the problem, identifies the sub-structure, selects the algorithm.
+
 o	Output: Python code that solves it + Time Complexity explanation.
+
 •	Evidence: Show the Agent solving problems it hasn't seen before. It could be in an iterative way, meaning you work with the agent/chat to tackle problems.
+
 
 We decided to create a complete professional prompt to ChatGPT, since its the best AI in terms of reasoning. This prompt complies with the instructions and conditions given and chooses the best method from a given list in the prompt. 
 
