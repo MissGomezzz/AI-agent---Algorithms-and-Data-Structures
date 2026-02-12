@@ -1,2 +1,202 @@
 The solution proposed for the first problem is:
 
+PHASE 1: DECONSTRUCTION AND FORMAL TRANSLATION
+
+1.1 Formal Algorithmic Objective
+
+OBJECTIVE: Simulate the evolution of a linear unweighted graph under local adjacency swap rules for a fixed number of discrete time steps.
+
+More precisely: determine the final configuration of a sequence of vertices after applying simultaneous swaps of adjacent (B, G) pairs during t iterations.
+
+1.2 Formal Graph Characterization
+
+We model the queue as a path graph:
+
+Cardinality
+a. V (number of vertices): n, where 1 ≤ n ≤ 50.
+b. E (number of edges): n − 1.
+c. E/V ratio: Sparse (E ≈ V).
+
+Directionality
+Undirected (adjacency between i and i+1).
+
+Weighting
+Unweighted.
+
+Guaranteed Connectivity
+Connected (single path).
+
+Special Properties
+Path graph (a tree, acyclic).
+
+Computational Scale
+Small: n ≤ 50, t ≤ 50.
+
+1.3 Critical Failure Cases
+
+• CRITICAL CASE 1: Consecutive pattern “BGBG”
+o Why it fails: A naive left-to-right swap without skipping the next index after a swap allows a girl to move more than one position in a single second.
+o Manifestation: Incorrect multiple swaps within the same time step.
+
+• CRITICAL CASE 2: In-place updates without controlled iteration
+o Why it fails: Swaps must be conceptually simultaneous. Sequential updates without index control may create cascading swaps in the same second.
+o Manifestation: Final configuration differs from the correct simulation.
+
+• CRITICAL CASE 3: t larger than stabilization time
+o Why it fails: Incorrect logic might continue modifying an already stabilized configuration.
+o Manifestation: Unnecessary operations or index handling errors.
+
+===================================================================
+
+PHASE 2: TACTICAL ALGORITHMIC DECISION MATRIX
+
+CATEGORY A: PATH AND DISTANCE EXPLORATION
+
+• BFS
+Applicable in a structural sense. The process evolves layer by layer in discrete time steps along a path graph.
+
+• Dijkstra
+Not applicable. No weighted shortest-path computation is required.
+
+• A*
+Not applicable. No heuristic-guided pathfinding problem.
+
+CATEGORY B: CONNECTIVITY AND STRUCTURE ANALYSIS
+
+• DFS
+Not applicable. No traversal-based structural analysis required.
+
+• Union-Find
+Not applicable. No dynamic connectivity queries.
+
+• Tarjan
+Not applicable. No SCC, articulation point, or bridge detection.
+
+• Topological Sort
+Not applicable. No DAG ordering requirement.
+
+CATEGORY C: TOTAL CONNECTION OPTIMIZATION (MST)
+
+• Kruskal
+Not applicable. No spanning tree optimization problem.
+
+• Prim
+Not applicable. No spanning tree optimization problem.
+
+CATEGORY D: SPECIAL SCENARIOS
+
+• Bellman-Ford
+Not applicable. No negative-weight shortest-path computation.
+
+• Floyd-Warshall
+Not applicable. No all-pairs shortest-path computation.
+
+• Max-Flow Algorithms
+Not applicable. No flow network problem.
+
+Mandatory Final Verdict
+
+Selected category: A
+Specific algorithm: BFS
+Main technical reason: The system evolves in discrete time layers on a path graph, analogous to breadth-wise expansion per second.
+Expected time complexity: O(n · t)
+Expected space complexity: O(n)
+
+===================================================================
+
+PHASE 3: LOGICAL DESIGN AND TECHNICAL INTUITION
+
+Technical Analogy
+
+The process behaves like waves propagating along a line: at each second, all local “B before G” conflicts are resolved simultaneously, similar to processing one BFS layer at a time.
+
+Operational Explanation
+
+Convert the input string into a mutable list.
+
+Repeat the following for each second from 1 to t.
+
+Traverse indices from 0 to n − 2.
+
+If positions i and i+1 form “B” followed by “G”, swap them.
+
+After swapping, increment i by 2 to avoid reprocessing.
+
+Continue until t iterations are completed.
+
+Data Representation Justification
+
+A Python list is optimal because:
+
+Adjacency is implicit (i and i+1).
+
+Swaps are O(1).
+
+Total simulation cost O(n · t) is acceptable for n, t ≤ 50.
+
+Using adjacency lists or matrices would introduce unnecessary overhead for a linear structure.
+
+===================================================================
+
+PHASE 4: PYTHON IMPLEMENTATION (CLEAN CODE STANDARDS)
+
+--(Python code available in this same folder as solution1.py)--
+
+===================================================================
+
+PHASE 5: TECHNICAL AUDIT AND VERIFICATION
+
+Manual Dry Run
+
+Example:
+n = 5, t = 1
+s = "BGGBG"
+
+Initial: B G G B G
+
+Second 1:
+i = 0 → B G → swap → G B G B G
+i = 2 → G B → no swap
+i = 3 → B G → swap → G B G G B
+
+Result: GBGGB
+
+Matches expected output.
+
+Detailed Complexity Table
+
+Preprocessing (list conversion): O(n)
+
+Core simulation: O(n · t)
+
+Output construction: O(n)
+
+Total time complexity: O(n · t)
+Total space complexity: O(n)
+
+Worst-case operations: 50 × 50 = 2500.
+
+Edge-Case and Corner-Case Validation
+
+• n = 1
+No adjacent pairs exist. Output equals input.
+
+• All boys or all girls
+No swaps occur. Stable from the start.
+
+• Alternating pattern “BGBGBG”
+Correct handling ensured by skipping index after swap.
+
+• Large t relative to n
+Once stabilized (all G before B), no further swaps occur. The algorithm preserves correctness without additional checks.
+
+===================================================================
+
+END OF ANALYSIS
+
+===================================================================
+
+
+
+
+
